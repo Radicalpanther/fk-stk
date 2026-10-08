@@ -13,6 +13,12 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Literal, Optional, Tuple
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 from playwright.async_api import async_playwright, Browser, Page, Playwright
 
 # Type aliases

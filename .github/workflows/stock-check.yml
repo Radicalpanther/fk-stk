@@ -6,8 +6,9 @@ on:
     - cron: '*/15 * * * *'
   workflow_dispatch:
     # Manual trigger
-  repository_dispatch:
-    # Trigger from other workflows
+
+permissions:
+  contents: write
 
 jobs:
   check_stock:
@@ -17,7 +18,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
           fetch-depth: 1
 
       - name: Set up Python
@@ -50,13 +50,14 @@ jobs:
       - name: Commit state change if needed
         if: always()
         run: |
-          # Check if state.json changed
           if [ -n "$(git status --porcelain state.json)" ]; then
             echo "State changed, committing..."
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add state.json
-            git commit -m "Update stock state - $(date)" || echo "No changes to commit or commit failed"
+            git commit -m "Update stock state [skip ci]" || echo "No changes to commit"
+            git pull --rebase origin main || true
+            git push origin main || echo "Push failed or nothing to push"
           else
             echo "No state changes to commit"
           fi
