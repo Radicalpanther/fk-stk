@@ -38,7 +38,7 @@ class FlipkartStockChecker:
         self.page: Optional[Page] = None
 
     def _load_config(self) -> Dict:
-        """Load configuration from JSON file."""
+        """Load configuration from JSON file, with secrets from environment."""
         if not self.config_path.exists():
             raise FileNotFoundError(f"Config file not found: {self.config_path}")
 
@@ -51,9 +51,17 @@ class FlipkartStockChecker:
             if field not in config:
                 raise ValueError(f"Missing required config field: {field}")
 
-        # Validate telegram config
-        if "bot_token" not in config["telegram"] or "chat_id" not in config["telegram"]:
-            raise ValueError("Telegram config must contain 'bot_token' and 'chat_id'")
+        # Validate telegram config or read from env
+        telegram_config = config["telegram"]
+        bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
+        chat_id = os.getenv("TELEGRAM_CHAT_ID")
+
+        if bot_token and chat_id:
+            # Use environment variables if present (GitHub Secrets)
+            telegram_config["bot_token"] = bot_token
+            telegram_config["chat_id"] = chat_id
+        elif "bot_token" not in telegram_config or "chat_id" not in telegram_config:
+            raise ValueError("Telegram config must contain 'bot_token' and 'chat_id' (or set TELEGRAM_BOT_TOKEN/TELEGRAM_CHAT_ID env vars)")
 
         return config
 
