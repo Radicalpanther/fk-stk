@@ -70,9 +70,7 @@ jobs:
           if [ -n "$(git status --porcelain state.json)" ]; then
             echo "State changed, committing..."
             git add state.json
-            git commit -m "Update stock state [skip ci]
-
-Co-Authored-By: Claude Code <noreply@anthropic.com>" || echo "No changes to commit"
+            git commit -m "Update stock state [skip ci]" || echo "No changes to commit"
             git push origin main || echo "Push failed"
           else
             echo "No state changes to commit"
