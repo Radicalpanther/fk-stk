@@ -33,9 +33,8 @@ ENV/
 *.swo
 *~
 
-# Screenshots and debug files
+# Screenshots (created by bot, uploaded as artifacts)
 screenshots/
-debug_*.png
 *.png
 
 # Logs
@@ -45,12 +44,15 @@ debug_*.png
 .DS_Store
 Thumbs.db
 
-# State (will be tracked in git but ignored for changes sometimes)
-# state.json - We DO want to track this
+# Environment variables (DO NOT COMMIT)
+.env
+.env.local
+.env.*.local
 
-# Config with secrets (use GitHub Secrets instead)
-# config.json - We DO want to track this template
-
-# Playwright
+# Playwright browsers
 playwright/.local-browsers/
 playwright/.app/
+
+# Debug files
+debug_*.html
+network_debug_*.json

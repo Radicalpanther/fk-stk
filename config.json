@@ -1,14 +1,12 @@
 {
-  "pincode": "410206",
   "telegram": {
     "bot_token": "YOUR_BOT_TOKEN_HERE",
     "chat_id": "YOUR_CHAT_ID_HERE"
   },
   "products": [
     {
-      "id": "COMHHT9GHUHHZXYK",
-      "name": "ASUS ExpertBook P5 (Core Ultra 7 255H, 16GB, 1TB, P5406CCA-SF0161WS)",
-      "url": "https://www.flipkart.com/asus-expertbook-p5-full-metal-oled-ai-pc-1-yr-adp-intel-core-ultra-7-255h-16-gb-1-tb-ssd-windows-11-home-p5606cca-sh0060ws-thin-light-laptop/p/itm1e3acc2fbb2c4"
+      "pid": "COMHHT9GHUHHZXYK",
+      "name": "ASUS ExpertBook P5 (Core Ultra 7 255H, 16GB, 1TB, P5406CCA-SF0161WS)"
     }
   ]
 }
