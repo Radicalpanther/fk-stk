@@ -37,7 +37,11 @@ jobs:
           pip install -r requirements.txt
 
       - name: Install Playwright browsers
-        run: playwright install --with-deps chromium
+        run: |
+          # Install Playwright without system dependencies first
+          playwright install chromium
+          # Then install only the required dependencies
+          playwright install-deps chromium || true
 
       - name: Run stock check
         env:
